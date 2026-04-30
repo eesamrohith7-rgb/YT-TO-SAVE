@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YT-TO-SAVE — YT Downloader</title>
+  <meta name="description" content="YT-TO-SAVE lets you download YouTube videos, shorts, and playlists in multiple formats (MP4, WebM, MP3). Fast, simple, and free for personal use.">
+  <meta name="keywords" content="YouTube downloader, download YouTube video, YT downloader, yt-dlp, mp3 download, mp4 downloader, save youtube">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="/">
+  <meta property="og:title" content="YT-TO-SAVE — YT Downloader">
+  <meta property="og:description" content="Download YouTube videos, shorts, and playlists in MP4, WebM or MP3. No account required.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="/">
+  <meta property="og:image" content="/logo.png">
+  <meta property="og:site_name" content="YT-TO-SAVE">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="YT-TO-SAVE — YT Downloader">
+  <meta name="twitter:description" content="Download YouTube videos, shorts, and playlists in MP4, WebM or MP3. No account required.">
+  <meta name="twitter:image" content="/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@600;800&family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="icon" href="/logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="/logo.png">
+  <meta name="theme-color" content="#0b0c0e">
+  <link rel="manifest" href="/site.webmanifest">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": "YT-TO-SAVE",
+        "url": "/",
+        "logo": "/logo.png"
+      },
+      {
+        "@type": "WebSite",
+        "url": "/",
+        "name": "YT-TO-SAVE",
+        "description": "Download YouTube videos, shorts, and playlists in MP4, WebM or MP3. No account required."
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo-left">
+      <img src="/logo.png" alt="YT-TO-SAVE logo — YouTube Downloader" class="site-logo">
+      <span class="visually-hidden">YT-TO-SAVE</span>
+    </div>
+    <div class="container">
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#how-to-use" class="footer-link">How to use</a>
+        <a href="#features" class="footer-link">Features</a>
+        <a href="#faq" class="footer-link">FAQ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1 class="gradient-text">YT Downloader</h1>
+      <form id="url-form" class="url-form">
+        <div class="input-group">
+          <span class="input-icon">🔗</span>
+          <input id="url-input" placeholder="Paste YouTube link here (https://...)" autocomplete="off" autofocus>
+          <button id="paste-btn" class="paste-btn" type="button">Paste & Detect</button>
+          <button id="fetch-btn" class="fetch-btn" type="submit"><span class="btn-text">Fetch</span><span class="spinner">⏳</span></button>
+        </div>
+        <div class="input-hint">Paste a YouTube link and press Enter or click Fetch.</div>
+      </form>
+    </section>
+
+  <!-- Q&A (inline) -->
+  <section id="qa" class="info-section">
+    <h2>Questions & Answers</h2>
+
+    <div class="term-section">
+      <h3>General Questions</h3>
+
+      <div class="qa-item">
+        <h4>What is YT-TO-SAVE?</h4>
+        <p>YT-TO-SAVE is a free online YouTube downloader that allows you to download videos, shorts, and playlists in various formats and qualities. The service is powered by yt-dlp and designed for personal use only.</p>
+      </div>
+
+      <div class="qa-item">
+        <h4>Do I need to create an account?</h4>
+        <p>No. YT-TO-SAVE requires no account creation. Simply paste a YouTube URL and start downloading.</p>
+      </div>
+
+      <div class="qa-item">
+        <h4>Is it legal to use?</h4>
+        <p>Downloading copyrighted material without permission may be illegal in your jurisdiction. Use YT-TO-SAVE only for content you have the right to download.</p>
+      </div>
+
+      <div class="qa-item">
+        <h4>What formats are supported?</h4>
+        <p>Supported formats include MP4, WebM, and MP3. Quality ranges from 144p up to 4K where available.</p>
+      </div>
+    </div>
+
+    <div class="term-section">
+      <h3>Technical Questions</h3>
+
+      <div class="qa-item">
+        <h4>How long does a download take?</h4>
+        <p>Depends on video length, quality, and your internet speed. Typical 10-minute videos at 720p download within a couple minutes on a decent connection.</p>
+      </div>
+
+      <div class="qa-item">
+        <h4>Can I pause and resume?</h4>
+        <p>Pausing is supported while the download is active. Reloading the page will require restarting the download.</p>
+      </div>
+    </div>
+
+    <div class="term-section">
+      <h3>Privacy & Security</h3>
+
+      <div class="qa-item">
+        <h4>Is my data safe?</h4>
+        <p>We process URLs temporarily and do not store personal data. We may collect anonymous usage stats to improve the service.</p>
+      </div>
+    </div>
+
+    <div class="term-section">
+      <h3>Troubleshooting</h3>
+
+      <div class="qa-item">
+        <h4>Why can't I download a video?</h4>
+        <p>Videos can be restricted (private, age-restricted, region-locked) or temporarily unavailable.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p class="footer-text">Powered by <strong>yt-dlp</strong> &middot; For personal use only</p>
+      <div class="footer-links">
+        <a href="#terms" class="footer-link">Terms & Conditions</a>
+        <a href="#privacy" class="footer-link">Privacy Policy</a>
+        <a href="#qa" class="footer-link">Q&A</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Terms and Conditions (inline) -->
+  <section id="terms" class="info-section">
+    <h2>Terms and Conditions</h2>
+
+    <div class="term-section">
+      <h3>1. Acceptance of Terms</h3>
+      <p>By accessing and using YT-TO-SAVE, you accept and agree to be bound by the terms and provisions of this agreement. If you do not agree to these terms, please do not use this service.</p>
+    </div>
+
+    <div class="term-section">
+      <h3>2. Use License</h3>
+      <p>Permission is granted to temporarily download one copy of the materials (information or software) on YT-TO-SAVE for personal, non-commercial transitory viewing only. This is a license, not a transfer of title. Under this license you may not:</p>
+      <ul>
+        <li>Modify or copy the materials</li>
+        <li>Use the materials for any commercial purpose or public display</li>
+        <li>Attempt to decompile or reverse engineer any software contained on YT-TO-SAVE</li>
+        <li>Remove any copyright or proprietary notations from the materials</li>
+        <li>Transfer the materials to another person or mirror them on any other server</li>
+      </ul>
+    </div>
+
+    <div class="term-section">
+      <h3>3. Disclaimer</h3>
+      <p>The materials on YT-TO-SAVE are provided on an "as is" basis. YT-TO-SAVE makes no warranties, expressed or implied, and hereby disclaims all other warranties including, without limitation, implied warranties of merchantability, fitness for a particular purpose, or non-infringement.</p>
+    </div>
+
+    <div class="term-section">
+      <h3>4. Limitations</h3>
+      <p>In no event shall YT-TO-SAVE or its suppliers be liable for any damages arising out of the use or inability to use the materials on YT-TO-SAVE.</p>
+    </div>
+
+    <div class="term-section">
+      <h3>5. Accuracy of Materials</h3>
+      <p>Materials on YT-TO-SAVE could include technical, typographical, or photographic errors. YT-TO-SAVE does not warrant that any materials are accurate, complete, or current.</p>
+    </div>
+
+    <div class="term-section">
+      <h3>6. Links</h3>
+      <p>YT-TO-SAVE has not reviewed all sites linked to its website and is not responsible for the contents of any such linked site. Inclusion of any link does not imply endorsement.</p>
+    </div>
+
+    <div class="term-section">
+      <h3>7. Modifications</h3>
+      <p>YT-TO-SAVE may revise these terms at any time. By using this website you agree to be bound by the then-current version of these terms.</p>
+    </div>
+
+    <div class="term-section">
+      <h3>8. Governing Law</h3>
+      <p>These terms are governed by the laws of the jurisdiction in which YT-TO-SAVE operates.</p>
+    </div>
+  </section>
+  <!-- Privacy Policy (inline) -->
+  <section id="privacy" class="info-section">
+    <h2>Privacy Policy</h2>
+
+    <div class="term-section">
+      <h3>1. Introduction</h3>
+      <p>YT-TO-SAVE ("we," "us," "our," or "Company") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website and use our services.</p>
+    </div>
+
+    <div class="term-section">
+      <h3>2. Information We Collect</h3>
+      <p>We collect information in various ways, including:</p>
+      <ul>
+        <li><strong>Information You Provide:</strong> When you use our service to download videos, we may temporarily process the YouTube URL you provide. This information is not stored.</li>
+        <li><strong>Automatically Collected Information:</strong> When you visit our website, we may automatically collect certain information about your device, including IP address, browser type, and pages visited.</li>
+      </ul>
+    </div>
+
+    <div class="term-section">
+      <h3>3. Use of Your Information</h3>
+      <p>We use the information we collect to provide and maintain our service, to improve our website, to analyze trends, and to prevent fraud.</p>
+    </div>
+
+    <div class="term-section">
+      <h3>4. Data Security</h3>
+      <p>We use administrative, technical, and physical security measures to protect your personal information. However, no method of transmission over the Internet or electronic storage is completely secure.</p>
+    </div>
+
+    <div class="term-section">
+      <h3>5. Third-Party Services</h3>
+      <p>Our service uses yt-dlp to download YouTube videos. We do not sell or share your personal information with third parties.</p>
+    </div>
+
+    <div class="term-section">
+      <h3>6. Cookies</h3>
+      <p>Our website may use cookies to enhance your experience. You can disable cookies via your browser settings.</p>
+    </div>
+
+    <div class="term-section">
+      <h3>7. Changes to This Privacy Policy</h3>
+      <p>We may update this Privacy Policy occasionally. Continued use constitutes acceptance of those changes.</p>
+    </div>
+
+    <div class="term-section">
+      <h3>8. Contact Us</h3>
+      <p>If you have any questions, please contact us and we will respond within a reasonable timeframe.</p>
+    </div>
+  </section>
+
+  <script src="/app.js"></script>
+</body>
+</html>
