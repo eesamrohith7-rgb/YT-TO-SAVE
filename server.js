@@ -5,6 +5,7 @@ const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const isVercel = !!process.env.VERCEL;
 
 app.set('view engine', 'ejs');
 app.set('views', __dirname);
@@ -15,23 +16,29 @@ app.use(express.static(path.join(__dirname, 'public')));
 const TMP_DIR = path.join(__dirname, 'tmp');
 if (!fs.existsSync(TMP_DIR)) fs.mkdirSync(TMP_DIR, { recursive: true });
 
-// Cleanup old temp files every 10 minutes
-setInterval(() => {
-  const now = Date.now();
-  fs.readdirSync(TMP_DIR).forEach(file => {
-    const fpath = path.join(TMP_DIR, file);
-    const stat = fs.statSync(fpath);
-    if (now - stat.mtimeMs > 10 * 60 * 1000) {
-      fs.unlinkSync(fpath);
-    }
-  });
-}, 10 * 60 * 1000);
+// Cleanup old temp files only in the long-running local/server environment.
+if (!isVercel) {
+  setInterval(() => {
+    const now = Date.now();
+    fs.readdirSync(TMP_DIR).forEach(file => {
+      const fpath = path.join(TMP_DIR, file);
+      const stat = fs.statSync(fpath);
+      if (now - stat.mtimeMs > 10 * 60 * 1000) {
+        fs.unlinkSync(fpath);
+      }
+    });
+  }, 10 * 60 * 1000);
+}
 
 app.get('/', (req, res) => {
   res.render('index');
 });
 
 app.post('/api/info', async (req, res) => {
+  if (isVercel) {
+    return res.status(503).json({ error: 'Video processing is disabled on Vercel. Deploy the app on a Node server or container host for download features.' });
+  }
+
   const { url } = req.body;
   if (!url || !url.includes('youtube.com') && !url.includes('youtu.be')) {
     return res.status(400).json({ error: 'Please enter a valid YouTube URL' });
@@ -85,6 +92,10 @@ app.post('/api/info', async (req, res) => {
 });
 
 app.get('/api/download/:id/:format_id', (req, res) => {
+  if (isVercel) {
+    return res.status(503).json({ error: 'Download streaming is disabled on Vercel. Use a Node server or container host for full functionality.' });
+  }
+
   const { id, format_id } = req.params;
   const outputPath = path.join(TMP_DIR, `${id}_${format_id}.%(ext)s`);
 
@@ -147,6 +158,10 @@ app.get('/api/download/:id/:format_id', (req, res) => {
 });
 
 app.get('/api/file/:filename', (req, res) => {
+  if (isVercel) {
+    return res.status(503).json({ error: 'File downloads are disabled on Vercel.' });
+  }
+
   const filename = req.params.filename.replace(/\.\.\//g, '');
   const filepath = path.join(TMP_DIR, filename);
 
