@@ -7,26 +7,33 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const isVercel = !!process.env.VERCEL;
 
+// Resolve app root: works in both local and serverless contexts
+const appRoot = process.env.VERCEL ? path.join(__dirname, '..') : __dirname;
+
 app.set('view engine', 'ejs');
-app.set('views', __dirname);
+app.set('views', appRoot);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(appRoot, 'public')));
 
-const TMP_DIR = path.join(__dirname, 'tmp');
+const TMP_DIR = path.join(appRoot, 'tmp');
 if (!fs.existsSync(TMP_DIR)) fs.mkdirSync(TMP_DIR, { recursive: true });
 
 // Cleanup old temp files only in the long-running local/server environment.
 if (!isVercel) {
   setInterval(() => {
     const now = Date.now();
-    fs.readdirSync(TMP_DIR).forEach(file => {
+    try {
+      fs.readdirSync(TMP_DIR).forEach(file => {
       const fpath = path.join(TMP_DIR, file);
       const stat = fs.statSync(fpath);
       if (now - stat.mtimeMs > 10 * 60 * 1000) {
         fs.unlinkSync(fpath);
       }
-    });
+      });
+    } catch (e) {
+      // ignore cleanup errors
+    }
   }, 10 * 60 * 1000);
 }
 
