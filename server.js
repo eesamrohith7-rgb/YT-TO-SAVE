@@ -4,7 +4,7 @@ const { spawn } = require('child_process');
 const fs = require('fs');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.set('view engine', 'ejs');
 app.set('views', __dirname);
@@ -225,5 +225,5 @@ function formatViewCount(count) {
 }
 
 app.listen(PORT, () => {
-  console.log(`YT Downloader running at http://localhost:${PORT}`);
+  console.log(`YT Downloader running on port ${PORT}`);
 });
