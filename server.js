@@ -9,9 +9,14 @@ const isVercel = !!process.env.VERCEL;
 
 // Resolve app root: works in both local and serverless contexts
 const appRoot = process.env.VERCEL ? path.join(__dirname, '..') : __dirname;
+const viewPath = path.resolve(appRoot);
+
+if (process.env.VERCEL) {
+  console.log('Vercel init: appRoot=' + appRoot + ', viewPath=' + viewPath);
+}
 
 app.set('view engine', 'ejs');
-app.set('views', appRoot);
+app.set('views', viewPath);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(appRoot, 'public')));
@@ -38,7 +43,17 @@ if (!isVercel) {
 }
 
 app.get('/', (req, res) => {
-  res.render('index');
+  try {
+    res.render('index');
+  } catch (err) {
+    console.error('Template error:', err.message);
+    res.status(500).send('<h1>Error</h1><p>' + err.message + '</p>');
+  }
+});
+
+app.use((err, req, res, next) => {
+  console.error('Error:', err.message);
+  res.status(500).json({ error: err.message });
 });
 
 app.post('/api/info', async (req, res) => {
